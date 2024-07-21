@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+  display: none !important;
+}
+
+@layer base {}
+
+@layer compoments {
+  .bgc-primary {
+    background-color: rgb(0, 17, 0);
+  }
+
+ 
+}
+
+@layer utilities {}
