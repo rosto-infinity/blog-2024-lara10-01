@@ -8,7 +8,7 @@
             <x-post :$post list />
         @endforeach
 
-        {{ $posts->links() }}
     </div>
+    {{ $posts->links() }}
 
 </x-layout>

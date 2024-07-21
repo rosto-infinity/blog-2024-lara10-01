@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = collect(['Laravel', 'TailwindCss', 'NextJS','Flutter','Python']);
+        $categories = collect(['Développement Web', 'Backend', 'Développement Mobile']);
 
         $categories->each(fn ($category) => Category::create([
             'name' => $category,

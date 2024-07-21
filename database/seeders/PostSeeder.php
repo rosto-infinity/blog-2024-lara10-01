@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Tag;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
@@ -15,11 +16,13 @@ class PostSeeder extends Seeder
     public function run(): void
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
         Post::factory(20)
             ->sequence(fn () => [
                 'category_id' => $categories->random(),
             ])
-            ->create();
+            ->create()
+            ->each(fn ($post) => $post->tags()->attach($tags->random(rand(0, 3))));
     }
 }

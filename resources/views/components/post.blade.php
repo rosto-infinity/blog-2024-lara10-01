@@ -6,22 +6,24 @@
         <img class="w-full max-h-72 object-cover lg:max-h-none lg:h-full" src="{{ $post->thumbnail }}">
     </div>
     <div class="flex flex-col items-start mt-5 space-y-5 lg:w-7/12 lg:mt-0 lg:ml-12">
-        
-        @if ($post->category)    
-        <a href="#" class="underline font-bold text-slate-900 text-lg">{{ $post->category->name }}</a>
+
+        @if ($post->category)
+            <a href="#" class="underline font-bold text-slate-900 text-lg">{{ $post->category->name }}</a>
         @endif
         <h1 class="font-bold text-slate-900 text-3xl lg:text-5xl leading-tight">{{ $post->title }}</h1>
-        <ul class="flex flex-wrap gap-2">
-            <li><a href=""
-                    class="px-3 py-1 border-x-2 border-green-300 bgc-primary text-green-300 rounded-full text-sm">Tag
-                    1</a></li>
-            <li><a href=""
-                    class="px-3 py-1 bg-green-950 border-x-2 border-green-300 text-green-300 rounded-full text-sm">
-                    Tag2
-                </a></li>
-            <li><a href=""
-                    class="px-3 py-1 bg-green-950 border-x-2 border-green-300 text-green-300 rounded-full text-sm">Tag
-                    3</a></li>
+
+        @if ($post->tags->isNotEmpty())
+            <ul class="flex flex-wrap gap-2">
+
+                @foreach ($post->tags as $tag )                  
+                <li><a href="#"
+                        class="px-3 py-1 border-x-2 border-green-300 bgc-primary text-green-300 rounded-full text-sm">{{ $tag->name }}</a>
+                </li>
+                @endforeach
+        @endif
+
+
+
         </ul>
 
         <p class="text-xl lg:text-2xl text-slate-600">
