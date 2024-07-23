@@ -56,7 +56,7 @@
                 >
                     <li><a href="" class="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100">Connexion</a></li>
                     <li>
-                        <a href="" class="flex items-center px-4 py-2 font-semibold text-sm text-indigo-700 hover:bg-gray-100">
+                        <a href="{{ route('register') }}" class="flex items-center px-4 py-2 font-semibold text-sm text-indigo-700 hover:bg-gray-100">
                             Inscription
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 ml-1">
                                 <path fill-rule="evenodd" d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z" clip-rule="evenodd" />
@@ -67,7 +67,7 @@
                 <ul class="hidden md:flex space-x-12 font-semibold">
                     <li><a href="">Connexion</a></li>
                     <li>
-                        <a href="" class="flex items-center group p-1 border-2  border-green-950 rounded-md  text-green-950 ">
+                        <a href="{{ route('register') }}" class="flex items-center group p-1 border-2  border-green-950 rounded-md  text-green-950 ">
                             Inscription
                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mx-1 group-hover:ml-2 group-hover:mr-0 transition-all">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
@@ -77,6 +77,22 @@
                 </ul>
             </nav>
         </header>
+
+
+        @if (session('status'))
+        <div class="mt-10 rounded-md bg-green-50 p-4">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium text-green-800">{{ session('status') }}</p>
+                </div>
+            </div>
+        </div>
+        @endif
 
         <main class="mt-10 md:mt-12 lg:mt-16">
            {{ $slot }} 

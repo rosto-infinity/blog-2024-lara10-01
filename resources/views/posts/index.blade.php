@@ -1,4 +1,4 @@
-<x-layout>
+<x-default-layout>
     <div class="space-y-10 md:space-y-16 mb-5">
 
         {{-- <div class="mb-2"> Nombre d'article : {{ $total }} </div> --}}
@@ -32,4 +32,4 @@
     </div>
     {{ $posts->links() }}
 
-</x-layout>
+</x-default-layout>
