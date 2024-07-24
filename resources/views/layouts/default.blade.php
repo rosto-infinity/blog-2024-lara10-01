@@ -32,16 +32,32 @@
                     </svg>
                 </button>
             </form>
+
             {{-- Navigation --}}
             <nav x-data="{ open: false }" x-cloak class="relative">
                 <button
                     @click="open = !open"
                     @click.outside="if (open) open = false"
-                    class="md:hidden w-8 h-8 flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    @class([
+                        'w-8 h-8 flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2',
+                        // 'md:hidden'=>auth()->guest(), 
+                        'md:hidden'=> Auth::guest(), 
+                    ])
+   
                 >
+
+                    @auth
+                    
+                    
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10 grid justify-center items-center border-1 text-white bg-[#5c5c5c] rounded-full w-8 h-8 ">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                      </svg>
+                        
+                    @else  
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
                     </svg>
+                    @endauth
                 </button>
                 <ul
                     x-show="open"
@@ -51,19 +67,53 @@
                     x-transition:leave="transition ease-in duration-75"
                     x-transition:leave-start="transform opacity-100 scale-100"
                     x-transition:leave-end="transform opacity-0 scale-95"
-                    class="md:hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    
+                    @class([
+                        'absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none',
+                        'md:hidden' => Auth::guest(), 
+                    ])
+                   
                     tabindex="-1"
                 >
-                    <li><a href="{{ route('login') }}" class="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100">Connexion</a></li>
+
+                    @auth
+                        
                     <li>
-                        <a href="{{ route('register') }}" class="flex items-center px-4 py-2 font-semibold text-sm text-indigo-700 hover:bg-gray-100">
-                            Inscription
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 ml-1">
-                                <path fill-rule="evenodd" d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z" clip-rule="evenodd" />
-                            </svg>
+                        <a href="{{ route('home') }}" class="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100">
+                        Mon compte
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('logout') }}" @click.prevent="$refs.logout.submit()" class="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100">
+                        Déconnexion
+                        </a>
+                    </li>
+
+                    <form x-ref="logout" action="{{ route('logout') }}" method="POST"class="hidden">
+                        @csrf
+
+                    </form>
+
+                    @else
+                        <li>
+                            <a href="{{ route('login') }}" class="block px-4 py-2 text-md text-gray-700 hover:bg-gray-100">
+                            Connexion
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('register') }}" class="flex items-center px-4 py-2 font-semibold text-sm text-green-950 hover:bg-gray-100">
+                                Inscription
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 ml-1">
+                                    <path fill-rule="evenodd" d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </li>
+
+                    @endauth
                 </ul>
+
+                @guest
                 <ul class="hidden md:flex space-x-12 font-semibold">
                     <li><a href="{{ route('login') }}">Connexion</a></li>
                     <li>
@@ -75,6 +125,7 @@
                         </a>
                     </li>
                 </ul>
+                @endguest
             </nav>
         </header>
 

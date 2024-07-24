@@ -8,9 +8,9 @@
     <div class="flex flex-col items-start mt-5 space-y-5 lg:w-7/12 lg:mt-0 lg:ml-12">
 
         @if ($post->category)
-            <a href="{{ route('posts.byCategory', ['category' => $post->category]) }}"
+            <a  href="{{ route('posts.byCategory', ['category' => $post->category]) }}"
 
-                class="underline font-bold text-slate-900 text-lg">{{ $post->category->name }}</a>
+                class="underline  text-green-700 text-bold uppercase font-extrabold text-lg">{{ $post->category->name }}</a>
         @endif
         <h1 class="font-bold text-slate-900 text-3xl lg:text-5xl leading-tight">{{ $post->title }}</h1>
 
@@ -50,7 +50,7 @@
             </a>
         @else
             <time class="test-sm text-green-300 " datetime="{{ $post->created_at }}">
-                @datetime($post->created_at)
+              <span class="text-slate-300">Publié le @datetime($post->created_at)</span> 
             </time>
 
             {{-- @dump($post->created_at) --}}
